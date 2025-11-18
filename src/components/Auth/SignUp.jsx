@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from '../../styles/SignUp.module.css';
-
+// Sign up
 const SignUp = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
