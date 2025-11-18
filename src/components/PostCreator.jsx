@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ref, push } from "firebase/database";
 import { db, auth } from "../firebaseConfig";
 import { useAuth } from "../context/AuthContext";
+import styles from "../styles/PostCreator.module.css"; // <<--- CSS MODULE IMPORT
 
 export default function PostCreator() {
   const { signOut } = useAuth();
@@ -10,18 +11,20 @@ export default function PostCreator() {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Sign Out
   const handleSignOut = async () => {
     try {
       await signOut();
     } catch (error) {
-      alert('Error signing out: ' + error.message);
+      alert("Error signing out: " + error.message);
     }
   };
 
-  // Select image and show preview
+  // Image selection
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
+
     if (file) {
       setPreview(URL.createObjectURL(file));
     }
@@ -49,7 +52,7 @@ export default function PostCreator() {
     return data.data.url;
   };
 
-  // Save post to Firebase Realtime Database
+  // Save post to Firebase
   const savePostToDB = async (imageUrl) => {
     const postData = {
       imageUrl,
@@ -61,12 +64,13 @@ export default function PostCreator() {
     await push(ref(db, "posts"), postData);
   };
 
-  // Handle submit
+  // Submit post
   const handleSubmit = async () => {
     if (!image) {
       alert("Please choose an image!");
       return;
     }
+
     if (!caption.trim()) {
       alert("Caption cannot be empty!");
       return;
@@ -75,13 +79,9 @@ export default function PostCreator() {
     setLoading(true);
 
     try {
-      // Step 1: Upload image to ImgBB
       const imageUrl = await uploadToImgBB(image);
-
-      // Step 2: Save post to Firebase DB
       await savePostToDB(imageUrl);
 
-      // Reset form
       setCaption("");
       setImage(null);
       setPreview(null);
@@ -96,35 +96,37 @@ export default function PostCreator() {
   };
 
   return (
-    <div className="post-creator-container">
-      <div className="post-creator-header">
-        <h2 className="post-creator-title">Create a Post</h2>
-        <button
-          onClick={handleSignOut}
-          className="sign-out-button"
-        >
-          Sign Out
-        </button>
+    <div className={styles.container}>
+      {/* Header */}
+      <div className={styles.header}>
+        <div className={styles.headerRow}>
+          <h2 className={styles.title}>Create a Post</h2>
+
+          <button onClick={handleSignOut} className={styles.signOutButton}>
+            Sign Out
+          </button>
+        </div>
       </div>
 
       {/* Image Input */}
-      <div className="image-input-container">
+      <div className={styles.imageInputContainer}>
         <input
           id="image-input"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="image-input"
+          className={styles.imageInput}
         />
-        <label htmlFor="image-input" className="image-input-label">
+
+        <label htmlFor="image-input" className={styles.imageInputLabel}>
           Choose an Image
         </label>
       </div>
 
-      {/* Preview */}
+      {/* Preview Image */}
       {preview && (
-        <div className="preview-container">
-          <img src={preview} alt="preview" className="preview-image" />
+        <div className={styles.previewContainer}>
+          <img src={preview} alt="preview" className={styles.previewImage} />
         </div>
       )}
 
@@ -133,144 +135,17 @@ export default function PostCreator() {
         placeholder="Write a caption..."
         value={caption}
         onChange={(e) => setCaption(e.target.value)}
-        className="caption-textarea"
+        className={styles.captionTextarea}
       />
 
       {/* Submit Button */}
       <button
         onClick={handleSubmit}
         disabled={loading}
-        className="submit-button"
+        className={styles.submitButton}
       >
         {loading ? "Uploading..." : "Post"}
       </button>
-
-      <style jsx>{`
-        .post-creator-container {
-          max-width: 500px;
-          margin: 20px auto;
-          padding: 20px;
-          border: 1px solid #ddd;
-          border-radius: 15px;
-          background: #fff;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          font-family: 'Arial', sans-serif;
-        }
-        .post-creator-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-        .post-creator-title {
-          margin: 0;
-          font-size: 1.5rem;
-          color: #333;
-        }
-        .sign-out-button {
-          padding: 8px 16px;
-          background-color: #dc3545;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 14px;
-          transition: background-color 0.3s ease;
-        }
-        .sign-out-button:hover {
-          background-color: #c82333;
-        }
-        .image-input-container {
-          margin-bottom: 20px;
-        }
-        .image-input {
-          display: none;
-        }
-        .image-input-label {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #f0f0f0;
-          color: #333;
-          border: 2px dashed #ccc;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: border-color 0.3s ease, background-color 0.3s ease;
-        }
-        .image-input-label:hover {
-          border-color: #6200ee;
-          background-color: #f9f9f9;
-        }
-        .preview-container {
-          margin-bottom: 20px;
-        }
-        .preview-image {
-          width: 100%;
-          border-radius: 10px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .caption-textarea {
-          width: 100%;
-          height: 100px;
-          margin-bottom: 20px;
-          padding: 10px;
-          border-radius: 10px;
-          border: 1px solid #ccc;
-          font-family: inherit;
-          resize: vertical;
-          transition: border-color 0.3s ease;
-        }
-        .caption-textarea:focus {
-          outline: none;
-          border-color: #6200ee;
-        }
-        .submit-button {
-          width: 100%;
-          padding: 12px;
-          background: #6200ee;
-          color: #fff;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-          font-size: 16px;
-          transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .submit-button:hover:not(:disabled) {
-          background: #5000cc;
-          transform: translateY(-2px);
-        }
-        .submit-button:disabled {
-          background: #ccc;
-          cursor: not-allowed;
-        }
-        @media (max-width: 600px) {
-          .post-creator-container {
-            margin: 10px;
-            padding: 15px;
-          }
-          .post-creator-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-          }
-          .post-creator-title {
-            font-size: 1.3rem;
-          }
-          .sign-out-button {
-            align-self: flex-end;
-          }
-          .image-input-label {
-            padding: 8px 16px;
-            font-size: 14px;
-          }
-          .caption-textarea {
-            height: 80px;
-          }
-          .submit-button {
-            padding: 10px;
-            font-size: 14px;
-          }
-        }
-      `}</style>
     </div>
   );
 }

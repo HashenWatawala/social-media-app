@@ -1,0 +1,115 @@
+/* Main container */
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow: hidden; /* <--- prevents children from going out */
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Sign Out Button */
+.signOutButton {
+  padding: 10px 16px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* IMAGE INPUT */
+.imageInputContainer {
+  width: 100%;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.imageInput {
+  display: none;
+}
+
+/* The dashed box */
+.imageInputLabel {
+  width: 100%;
+  display: block;
+  padding: 14px;
+  border: 2px dashed #dee2e6;
+  background: #f8f9fa;
+  text-align: center;
+  color: #333;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  box-sizing: border-box; /* <--- keep inside parent */
+}
+
+/* Preview */
+.previewContainer {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.previewImage {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Caption Box */
+.captionTextarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  box-sizing: border-box; /* <--- important */
+  resize: vertical;
+  font-size: 15px;
+  font-family: inherit;
+  margin-bottom: 18px;
+}
+
+/* Post Button */
+.submitButton {
+  width: 100%;
+  padding: 15px;
+  background: #6200ee;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+}

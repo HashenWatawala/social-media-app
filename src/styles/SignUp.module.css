@@ -1,0 +1,148 @@
+/* SignUp.module.css */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: clamp(20px, 5vw, 30px);
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.header {
+  font-size: clamp(24px, 5vw, 28px);
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.errorAlert {
+  color: #d9534f;
+  background-color: #fbeaea;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border-left: 4px solid #d9534f;
+  font-weight: 500;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.formGroup {
+  margin-bottom: clamp(15px, 4vw, 18px);
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+  font-size: clamp(14px, 4vw, 16px);
+}
+
+.input {
+  width: 100%;
+  padding: clamp(10px, 3vw, 12px) clamp(12px, 3vw, 15px);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: clamp(14px, 4vw, 16px);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  min-height: 48px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.button {
+  width: 100%;
+  padding: clamp(12px, 3vw, 14px);
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: clamp(14px, 4vw, 16px);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s, opacity 0.2s, transform 0.1s;
+  min-height: 48px;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.footerText {
+  text-align: center;
+  margin-top: 25px;
+  color: #777;
+  font-size: clamp(13px, 3vw, 14px);
+  line-height: 1.5;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #0056b3;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  .input {
+    min-height: 44px;
+  }
+  
+  .button {
+    min-height: 44px;
+  }
+}
+
+/* Desktop enhancements */
+@media (min-width: 769px) {
+  .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  }
+}

@@ -1,0 +1,141 @@
+/* Loading + Empty Containers */
+.loadingContainer,
+.emptyContainer {
+  text-align: center;
+  padding: 50px;
+  font-family: 'Arial', sans-serif;
+}
+
+.loadingContainer h2,
+.emptyContainer h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.loadingContainer p,
+.emptyContainer p {
+  color: #666;
+}
+
+/* FEED */
+.feedContainer {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.feedTitle {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* GRID */
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.postCard {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* IMAGE */
+.postImageContainer {
+  height: 250px;
+  overflow: hidden;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.postImage:hover {
+  transform: scale(1.05);
+}
+
+/* CONTENT */
+.postContent {
+  padding: 20px;
+}
+
+.postCaption {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0 0 15px 0;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* META */
+.postMetadata {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.postAuthor {
+  margin: 0 0 5px 0;
+}
+
+.postTimestamp {
+  margin: 0;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 768px) {
+  .feedContainer {
+    padding: 0 10px;
+  }
+
+  .feedTitle {
+    font-size: 1.5rem;
+  }
+
+  .postsGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .postImageContainer {
+    height: 200px;
+  }
+
+  .postContent {
+    padding: 15px;
+  }
+
+  .postCaption {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .postImageContainer {
+    height: 180px;
+  }
+
+  .postContent {
+    padding: 10px;
+  }
+
+  .postCaption {
+    font-size: 1rem;
+  }
+}
